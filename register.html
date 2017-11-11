@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head runat="server">
+    <meta charset="utf-8">
+    <title>Dosya Yinetim Portalı</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/form.css" rel=stylesheet>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#uye_formu").on("keyup", function (event) {
+                form_kontrolu();
+            });
+
+
+        });
+
+
+        var form_kontrolu = function () {
+            var kadi = $("#kadi").val();
+            var sifre1 = $("#sifre1").val();
+            var sifre2 = $("#sifre2").val();
+            var email = $("#email").val();
+            var atpos = email.indexOf("@");
+            var dotpos = email.lastIndexOf(".");
+            if (kadi == null || kadi == "" || kadi.length < 4)
+                $('.uyari').html("Kullanıcı adı 4 karakterden az olamaz");
+            else if (sifre1 == null || sifre1 == "" || sifre2 == null || sifre2 == "")
+                $('.uyari').html("Şifreyi boş bırakmayın");
+            else if (!(sifre1 == sifre2))
+                $('.uyari').html("Şifreler eşleşmiyor");
+            else if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length)
+                $('.uyari').html("Geçerli email adresi girin");
+            else {
+                $('.uyari').empty();
+                $('#uye_formu').removeAttr('onsubmit');
+                $("#kaydetButton").click(function () {
+                    window.location.href = 'index.html';
+                    console.log();
+                    });
+            }
+
+        }
+      
+
+        
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <!--Kullan�c� Kayd� -->
+        <div class="row" style="margin-top:20px">
+            <div id="registerpanel">
+                <div class="row" style="margin-top:20px">
+                    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                        <div class="form" name="uye_formu" id="uye_formu" action="" method="post" onsubmit="return false;">
+                            <h2>Kayıt Ol !</h2>
+
+                            <hr class="colorgraph">
+                            <div class="form-group">
+
+                                <input type="text" id="kadi" name="kadi" class="form-control input-lg" placeholder="Kullanıcı Adınız" aria-describedby="sizing-addon1">
+                            </div>
+                            <br>
+                            <div class="form-group">
+
+                                <input type="text" id="sifre1" name="sifre1" class="form-control input-lg" placeholder="Şifre" aria-describedby="sizing-addon1">
+                            </div>
+                            <br>
+                            <div class="form-group">
+
+                                <input type="text" id="sifre2" name="sfire2" class="form-control input-lg" placeholder="Şifre (Tekrar)" aria-describedby="sizing-addon1">
+                            </div>
+                            <br>
+                            <div class="form-group">
+
+                                <input type="text" id="email" name="email" class="form-control input-lg" placeholder="E-Mail Adresiniz" aria-describedby="sizing-addon1">
+                            </div>
+                            <br>
+                            <hr class="colorgraph">
+                                <button class="btn btn-primary col-md-6" id="kaydetButton" type="submit">Kaydı Tamamla</button><br />
+                            <div class="uyari"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+   
+</body>
+</html>

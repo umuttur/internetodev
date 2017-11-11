@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head runat="server">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+        <title>Dosya Yönetim Portalı</title>  
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/form.css" rel=stylesheet>
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#login_formu").on("keyup", function (event) {
+                login_kontrol();
+            });
+           
+            $("#kayitOlBUtton").click(function () {
+                window.location.href = 'register.html';
+
+            });
+           
+        });
+
+       
+      
+
+        var login_kontrol = function ()
+        {
+            var emailLogin = $("#emailLogin").val();
+            var passwordLogin = $("#passwordLogin").val();
+            var atpos = emailLogin.indexOf("@");
+            var dotpos = emailLogin.lastIndexOf(".");
+            if ((atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailLogin.length))
+                $('.uyariLogin').html("Geçerli email adresi girin");
+            else if (passwordLogin == null || passwordLogin == "")
+                $('.uyariLogin').html("Şifre Boş Olamaz");
+            else {
+                $('.uyariLogin').empty();
+                $('#login_formu').removeAttr('onsubmit');
+
+                $("#GirisYapButton").click(function () {
+                    window.location.href = 'dosyayukle.html';
+                    console.log();
+                });
+                
+            }
+           
+        }
+    </script>
+
+    </head>
+
+    <body>
+        <div class="container">
+            <!--Kullanıcı Kaydı -->
+            <div class="row" style="margin-top:20px">
+				<div id="login_panel">
+                    <div class="row" style="margin-top:20px">
+                        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                            <div class="form" name="login_formu" id="login_formu" action="" method="post" onsubmit="return false;">
+                               
+                                    <h2>Lütfen Giriş Yapın !</h2>
+                                    <hr class="colorgraph">
+                                    <div class="form-group">
+                                        <input type="email" name="emailLogin" id="emailLogin" class="form-control input-lg" placeholder="Mail Adresiniz">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="passwordLogin" id="passwordLogin" class="form-control input-lg" placeholder="Şifreniz">
+                                    </div>
+                                <hr class="colorgraph">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <button id="GirisYapButton" class="btn btn-lg btn-success btn-block" type="submit">Giriş Yap</button> 
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <button id="kayitOlBUtton" class="btn btn-lg btn-primary btn-block" type="submit">Kayıt Ol</button>
+                                        </div>
+                                        
+                                    </div>
+                                <div class="uyariLogin"></div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+					
+					</div>
+					</div>             
+</body>
+</html>
